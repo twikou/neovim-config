@@ -1,0 +1,5 @@
+vim.cmd("setlocal nonumber")
+vim.cmd("setlocal norelativenumber")
+vim.cmd("setlocal winhighlight=Normal:StatusLine,SignColumn:StatusLine")
+vim.cmd("startinsert")
+vim.keymap.set("n", "q", "<cmd>bd!<cr>", { buffer = 0, desc = "close terminal" })

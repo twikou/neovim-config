@@ -1,1 +1,1 @@
-vim.keymap.set("n", "q", "<c-w>q", { desc = "close help" })
+vim.keymap.set("n", "q", "<c-w>q", { buffer = true, desc = "close help" })

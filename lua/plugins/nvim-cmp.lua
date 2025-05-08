@@ -25,12 +25,23 @@ local formatting = function(lspkind)
 	}
 end
 
+local window = function(cmp)
+	opts = {
+		border = "single"
+	}
+	return {
+		completion = cmp.config.window.bordered(opts),
+		documentation = cmp.config.window.bordered(opts),
+	}
+end
+
 local setup = function(cmp, luasnip, lspkind)
 	cmp.setup({
 		snippet = snippet(luasnip),
 		mapping = mapping(cmp),
 		sources = sources(cmp),
 		formatting = formatting(lspkind),
+		window = window(cmp),
 	})
 end
 

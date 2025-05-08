@@ -16,3 +16,4 @@ vim.keymap.set({"n", "x"}, "k", function()
 end, { expr = true, desc = "move up visible line" })
 
 vim.keymap.set("t", "<esc>", "<c-\\><c-n>", { desc = "return to normal mode" })
+vim.keymap.set("n", "S", [["_S]], { desc = "clear line without yank" })

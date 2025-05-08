@@ -2,7 +2,14 @@ local sources = function(cmp)
 	return cmp.config.sources({
 		{ name = "luasnip" }
 	}, {
-		{ name = "buffer" },
+		{
+			name = "buffer",
+			option = {
+				get_bufnrs = function()
+					return vim.api.nvim_list_bufs()
+				end
+			}
+		},
 		{ name = "path" }
 	})
 end

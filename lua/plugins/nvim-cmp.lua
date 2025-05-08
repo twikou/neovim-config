@@ -7,8 +7,39 @@ local sources = function(cmp)
 	})
 end
 
-local mapping = function(cmp)
-	return cmp.mapping.preset.insert({})
+local has_words_before = function()
+	unpack = unpack or table.unpack
+	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+	return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
+
+local mapping = function(cmp, luasnip)
+	return cmp.mapping.preset.insert({
+		['<tab>'] = cmp.mapping(function(fallback)
+			if cmp.visible() then
+				-- tab to confirm
+				cmp.confirm({ select = true })
+			elseif luasnip.locally_jumpable(1) then
+				-- tab to jump next placeholder
+				luasnip.jump(1)
+			elseif has_words_before() then
+				-- tab to show completion
+				cmp.complete()
+				if #cmp.get_entries() == 1 then
+					cmp.confirm({ select = true })
+				end
+			else
+				fallback()
+			end
+		end, { "i", "s", "c" }),
+		["<s-tab>"] = cmp.mapping(function(fallback)
+			if luasnip.locally_jumpable(-1) then
+				luasnip.jump(-1)
+			else
+				fallback()
+			end
+		end, { "i", "s" }),
+	})
 end
 
 local snippet = function(luasnip)
@@ -38,7 +69,7 @@ end
 local setup = function(cmp, luasnip, lspkind)
 	cmp.setup({
 		snippet = snippet(luasnip),
-		mapping = mapping(cmp),
+		mapping = mapping(cmp, luasnip),
 		sources = sources(cmp),
 		formatting = formatting(lspkind),
 		window = window(cmp),

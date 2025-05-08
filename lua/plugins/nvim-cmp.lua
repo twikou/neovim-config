@@ -75,7 +75,7 @@ return {
 		"hrsh7th/cmp-cmdline",
 		"onsails/lspkind.nvim"
 	},
-	event = "InsertEnter",
+	event = "VeryLazy",
 	name = "cmp",
 	config = config,
 }

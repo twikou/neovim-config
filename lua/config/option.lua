@@ -1,0 +1,19 @@
+vim.opt.shiftwidth = 4
+vim.opt.tabstop = 4
+vim.opt.number = true -- show number column
+vim.opt.signcolumn = "yes" -- show sign column
+vim.opt.cursorline = true -- show highlight of current line
+vim.opt.wrap = true -- wrap line
+vim.opt.splitbelow = true -- new buffer at bottom when split
+vim.opt.splitright = true -- new buffer at right when split
+vim.opt.showmode = false -- no show mode
+vim.opt.fillchars = "eob: " -- no show character ~ at end of buffer
+vim.opt.ignorecase = true -- ignore case when search
+vim.opt.incsearch = true
+vim.opt.completeopt = "menuone,noselect" -- customize completion
+vim.opt.infercase = true -- infer letter cases for a richer built-in keyword completion
+vim.opt.smartindent = true
+vim.opt.virtualedit = "block"
+vim.opt.shortmess:append("I") -- disable startup screen
+vim.opt.list = true
+vim.opt.listchars = 'tab:│··,space:·,extends:…,precedes:…,nbsp:␣,eol:'

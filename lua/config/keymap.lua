@@ -17,3 +17,8 @@ end, { expr = true, desc = "move up visible line" })
 
 vim.keymap.set("t", "<esc>", "<c-\\><c-n>", { desc = "return to normal mode" })
 vim.keymap.set("n", "S", [["_S]], { desc = "clear line without yank" })
+vim.keymap.set("n", "<c-o>", "<c-o>zz", { desc = "jump previous and center" })
+vim.keymap.set("n", "<c-u>", "<c-u>zz", { desc = "scroll up and center" })
+vim.keymap.set("n", "<c-d>", "<c-d>zz", { desc = "scroll down and center" })
+vim.keymap.set("n", "<esc>", "<cmd>noh<cr><esc>", { desc = "stop highlight search" })
+

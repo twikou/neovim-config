@@ -17,13 +17,11 @@ return {
 		{ "<leader>c", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "find config file" },
 		{ "<leader>f", function() Snacks.picker.files() end, desc = "find files" },
 		{ "<leader>l", function() Snacks.picker.lines() end, desc = "buffer lines" },
-		{ "<leader>g", function() Snacks.picker.grep() end, desc = "grep" },
+		{ "<leader>s", function() Snacks.picker.grep() end, desc = "search" },
+		{ "<leader>g", function() Snacks.lazygit() end, desc = "search" },
 		{ "d.", function() Snacks.bufdelete() end, desc = "delete buffer" },
 	},
 	init = function()
 		vim.g.snacks_animate = false
-		vim.api.nvim_create_user_command("Git", function()
-			Snacks.lazygit()
-		end, {})
 	end
 }

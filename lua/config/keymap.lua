@@ -21,4 +21,6 @@ vim.keymap.set("n", "<c-o>", "<c-o>zz", { desc = "jump previous and center" })
 vim.keymap.set("n", "<c-u>", "<c-u>zz", { desc = "scroll up and center" })
 vim.keymap.set("n", "<c-d>", "<c-d>zz", { desc = "scroll down and center" })
 vim.keymap.set("n", "<esc>", "<cmd>noh<cr><esc>", { desc = "stop highlight search" })
+vim.keymap.set("n", "vaa", "ggVG", { desc = "around all" })
+vim.keymap.set("n", "s", "<nop>", { desc = "disable s" })
 

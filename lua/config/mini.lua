@@ -48,6 +48,7 @@ end)
 MiniDeps.later(function()
 	require("mini.pick").setup({})
 	vim.keymap.set("n", "<leader>f", "<cmd>Pick files<cr>")
+	vim.keymap.set("n", "<leader>s", "<cmd>Pick grep_live<cr>")
 	vim.keymap.set("n", "<leader>c", function()
 		MiniPick.builtin.files({}, {
 			source = {
@@ -99,9 +100,8 @@ MiniDeps.later(function()
 		incremental_selection = {
 			enable = true,
 			keymaps = {
-				init_selection = "s",
-				node_incremental = "s",
-				scope_incremental = "<m-s>",
+				init_selection = "<space>",
+				node_incremental = "<space>",
 				node_decremental = "x",
 			},
 		},

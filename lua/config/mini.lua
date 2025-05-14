@@ -29,9 +29,20 @@ MiniDeps.now(function()
 	require("mini.icons").setup({})
 	require("mini.statusline").setup({})
 	require("mini.tabline").setup({})
-	vim.cmd("hi! link MiniTablineFill StatusLineNC")
-	vim.cmd("hi! link MiniTablineModifiedCurrent Folded")
-	vim.cmd("hi! link MiniTablineModifiedHidden SpellLocal")
+	local normal = vim.api.nvim_get_hl(0, { name = "Normal" })
+	local warning = vim.api.nvim_get_hl(0, { name = "WarningMsg" })
+	local statusline = vim.api.nvim_get_hl(0, { name = "StatusLine" })
+	vim.api.nvim_set_hl(0, "MiniTablineFill", {
+		bg = statusline.bg
+	})
+	vim.api.nvim_set_hl(0, "MiniTablineModifiedCurrent", {
+		fg = warning.fg,
+		bg = normal.bg
+	})
+	vim.api.nvim_set_hl(0, "MiniTablineModifiedHidden", {
+		fg = warning.fg,
+		bg = statusline.bg
+	})
 end)
 
 MiniDeps.later(function()

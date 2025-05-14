@@ -79,6 +79,17 @@ MiniDeps.later(function()
 end)
 
 MiniDeps.later(function()
+	require("mini.jump").setup({})
+end)
+
+MiniDeps.later(function()
+	require("mini.bufremove").setup({})
+	vim.keymap.set("n", "<leader>q", function()
+		MiniBufremove.delete()
+	end)
+end)
+
+MiniDeps.later(function()
 	require("mini.diff").setup({
 		view = {
 			style = "sign",

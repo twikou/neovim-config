@@ -1,4 +1,4 @@
 require("config.option")
 require("config.keymap")
 require("config.terminal")
-require("config.lazy")
+require("config.mini")

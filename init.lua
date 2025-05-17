@@ -1,4 +1,5 @@
 require("config.option")
 require("config.keymap")
 require("config.terminal")
+require("config.lsp")
 require("config.mini")

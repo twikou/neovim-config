@@ -14,6 +14,6 @@ vim.opt.completeopt = "menuone,noselect" -- customize completion
 vim.opt.infercase = true -- infer letter cases for a richer built-in keyword completion
 vim.opt.smartindent = true
 vim.opt.virtualedit = "block"
-vim.opt.shortmess:append("I") -- disable startup screen
+vim.opt.shortmess:append("Ic") -- disable startup screen, silent <c-n> fallback
 vim.opt.list = true
 vim.opt.listchars = 'tab:│··,space:·,extends:…,precedes:…,nbsp:␣,eol:'

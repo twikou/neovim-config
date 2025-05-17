@@ -47,15 +47,7 @@ end)
 
 MiniDeps.later(function()
 	require("mini.pick").setup({})
-	vim.keymap.set("n", "<leader>f", "<cmd>Pick files<cr>")
 	vim.keymap.set("n", "<leader>s", "<cmd>Pick grep_live<cr>")
-	vim.keymap.set("n", "<leader>c", function()
-		MiniPick.builtin.files({}, {
-			source = {
-				cwd = vim.fn.stdpath("config")
-			}
-		})
-	end)
 end)
 
 MiniDeps.later(function()
@@ -72,6 +64,30 @@ end)
 
 MiniDeps.later(function()
 	require("mini.files").setup({})
+	vim.keymap.set("n", "<leader>f", function()
+		MiniFiles.open()
+	end)
+	vim.keymap.set("n", "<leader>c", function()
+		MiniFiles.open(vim.fn.stdpath("config"))
+	end)
+	vim.api.nvim_create_autocmd('User', {
+		pattern = 'MiniFilesBufferCreate',
+		callback = function(args)
+			local buf_id = args.data.buf_id
+			vim.keymap.set('n', '<leader>f', function()
+				local cur = MiniFiles.get_fs_entry()
+				local cwd = vim.fn.fnamemodify(cur.path, ":h")
+				MiniPick.builtin.files({}, {
+					source = {
+						cwd = cwd
+					}
+				})
+			end, { buffer = buf_id })
+		end,
+	})
+	vim.keymap.set("n", "-", function()
+		MiniFiles.open(vim.api.nvim_buf_get_name(0))
+	end)
 end)
 
 MiniDeps.later(function()
@@ -104,17 +120,32 @@ MiniDeps.add({
 })
 
 MiniDeps.later(function()
-	require("nvim-treesitter.configs").setup({
-		highlight = {
-			enable = true,
+	require("config.treesitter")
+end)
+
+MiniDeps.add({
+	source = "neovim/nvim-lspconfig",
+	name = "lspconfig"
+})
+
+MiniDeps.now(function()
+	require("config.lspconfig")
+end)
+
+MiniDeps.later(function()
+	local miniclue = require("mini.clue")
+	miniclue.setup({
+		triggers = {
+			{ mode = "n", keys = "g" },
+			{ mode = "n", keys = "\\" },
 		},
-		incremental_selection = {
-			enable = true,
-			keymaps = {
-				init_selection = "<space>",
-				node_incremental = "<space>",
-				node_decremental = "x",
-			},
-		},
+		clues = {
+			miniclue.gen_clues.builtin_completion(),
+			miniclue.gen_clues.g(),
+			miniclue.gen_clues.marks(),
+			miniclue.gen_clues.registers(),
+			miniclue.gen_clues.windows(),
+			miniclue.gen_clues.z(),
+		}
 	})
 end)
